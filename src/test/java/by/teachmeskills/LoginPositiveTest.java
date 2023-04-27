@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LoginPositiveTest extends BaseTest {
 
     @Test
-    public void LoginAsStandardUser() {
+    public void loginAsStandardUser() {
         WorkingPage workingPage = new LoginPage(driver).open()
                 .loginAsStandardUser();
         assertThat(workingPage.isOpened())

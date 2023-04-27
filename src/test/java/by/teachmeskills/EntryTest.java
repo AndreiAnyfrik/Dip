@@ -4,6 +4,8 @@ import by.teachmeskills.page.LoginPage;
 import by.teachmeskills.page.WorkingPage;
 
 import by.teachmeskills.page.WritingPage;
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -18,7 +20,8 @@ public class EntryTest extends BaseTest {
         new LoginPage(driver).open().loginAsStandardUser().isOpened();
         WritingPage entry = new WorkingPage(driver).createEntry();
         assertThat(entry.isOpened()).isTrue().as("Writing Page has not been opened");
-        final String expNote = "4564564";
+        Faker faker =new Faker();
+        String expNote = String.valueOf(faker.name());
         new WritingPage(driver).writeNote(expNote);
         List<String> actNote = new WorkingPage(driver).getAllNameNotes();
         assertThat(actNote).as("Text" + expNote + "has not been displayed").contains(expNote);

@@ -31,13 +31,14 @@ public class RegistrationPage extends BasePage {
         return driver.findElement(LOCATOR_PAGE).isDisplayed();
     }
 
-    public void getRegistration() {
+    public RegistrationPage getRegistration() {
         driver.findElement(EMAIL).sendKeys(EMAIL_USER);
         driver.findElement(PASSWORD).sendKeys(PASSWORD_USER);
         driver.findElement(PASSWORD_CONFIRMATION).sendKeys(CONFIRM_PASSWORD_USER);
         driver.findElement(AGREE_ONE).click();
         driver.findElement(AGREE_TWO).click();
         driver.findElement(OK_BUTTON).click();
+        return new RegistrationPage(driver);
     }
 
     public RegistrationPage registerAllFields(String email, String password, String confirmPassword) {

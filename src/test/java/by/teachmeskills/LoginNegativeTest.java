@@ -10,13 +10,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LoginNegativeTest extends BaseTest {
 
     @Test
-    public void LogWithIncorrectUserNameAndPassword() {
+    public void logWithIncorrectUserNameAndPassword() {
         String expectedError = "Login failed";
         String errorInvalidUserNameAndInvalidPassword = new LoginPage(driver).open().loginWithIncorrectLoginAndPassword()
                 .getErrorInvalidUserNameAndInvalidPassword();
         assertThat(errorInvalidUserNameAndInvalidPassword)
                 .isEqualTo(expectedError).
-                as(" " + expectedError + "is not displayed after LogWithInvalidUserNameAndPassword");
+                as(" " + expectedError + "is not displayed after log in with invalid user name and password");
 
     }
 
@@ -27,7 +27,7 @@ public class LoginNegativeTest extends BaseTest {
                 .getErrorEmptyPassword();
         assertThat(errorEmptyPassword)
                 .isEqualTo(expectedError)
-                .as(" " + expectedError + "is not displayed after logWithoutPassword");
+                .as(" " + expectedError + "is not displayed after log in without password");
     }
 
     @Test
@@ -36,11 +36,11 @@ public class LoginNegativeTest extends BaseTest {
         String errorAfterEmptyPassword = new LoginPage(driver).open().loginWithEmptyFields().getErrorEmptyPassword();
         assertThat(errorAfterEmptyPassword)
                 .isEqualTo(expectedError)
-                .as(" " + expectedError + "is not displayed after logWithEmptyFields");
+                .as(" " + expectedError + "is not displayed after log in with empty fields");
         String errorAfterEmptyPassword1 = new LoginPage(driver).getErrorEmptyLogin();
         assertThat(errorAfterEmptyPassword1)
                 .isEqualTo(expectedError)
-                .as(" " + expectedError + "is not displayed after logWithEmptyFields");
+                .as(" " + expectedError + "is not displayed after log in with empty fields");
     }
 }
 

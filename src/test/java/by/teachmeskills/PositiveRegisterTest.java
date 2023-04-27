@@ -12,8 +12,7 @@ public class PositiveRegisterTest extends BaseTest {
     public void registrationWithAllFields() {
         RegistrationPage registrationPage = new LoginPage(driver).open().checkRegistration();
         assertThat(registrationPage.isOpened()).isTrue().as("RegistrationPage don't opened");
-        new RegistrationPage(driver).getRegistration();
-        boolean openedSuccessfulForm = new RegistrationPage(driver).isOpenedSuccessfulForm();
+        boolean openedSuccessfulForm = new RegistrationPage(driver).getRegistration().isOpenedSuccessfulForm();
         assertThat(openedSuccessfulForm).isTrue().as("SuccessfulRegistrationPage has not been opened");
     }
 }

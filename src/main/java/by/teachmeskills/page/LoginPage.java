@@ -1,16 +1,15 @@
 package by.teachmeskills.page;
 
 import by.teachmeskills.testng.PropertiesLoader;
-import lombok.extern.log4j.Log4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import io.qameta.allure.Attachment;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Properties;
 
-@Log4j
+@Log4j2
 public class LoginPage extends BasePage {
 
     private static final By USER_NAME = By.id("login");
@@ -27,16 +26,13 @@ public class LoginPage extends BasePage {
     private static final String EMPTY_PASSWORD = "";
 
     private static final By DONATE_BUTTON = By.xpath("//a[contains(@ng-show, 'donationButtonVisible')]");
-    ;
+
     private By ERROR_INVALID_LOGIN = By.xpath("//form[@ng-hide='loggedIn']//div[@ng-show='formStatus']");
     private By ERROR_EMPTY_LOGIN = By.xpath("//label[contains(text(), 'User')]//ancestor::" +
             "div[contains(@class, 'form-group')]//div[contains(@class, 'help-block')]");
     private By ERROR_EMPTY_PASSWORD = By.xpath("//label[contains(text(), 'Password')]//ancestor::" +
             "div[contains(@class, 'form-group')]//div[contains(@class, 'help-block')]");
     public By REGISTER_BTN = By.xpath("//a[@href='/account/registration']");
-
-
-    private Logger log = LogManager.getLogger(LoginPage.class);
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -67,6 +63,7 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         return driver.findElement(LOGIN_BUTTON).isDisplayed();
     }
+
     public RegistrationPage checkRegistration() {
         driver.findElement(REGISTER_BTN).click();
         log.info("Registration page is opened ");
@@ -92,6 +89,7 @@ public class LoginPage extends BasePage {
         driver.findElement(DONATE_BUTTON).click();
         return new DonatePage(driver);
     }
+
     public LoginPage loginWithIncorrectLoginAndPassword() {
         driver.findElement(USER_NAME).sendKeys(INCORRECT_LOGIN);
         driver.findElement(PASSWORD).sendKeys(INCORRECT_PASSWORD);
@@ -112,11 +110,13 @@ public class LoginPage extends BasePage {
         driver.findElement(LOGIN_BUTTON).click();
         return new LoginPage(driver);
     }
+
     public String getErrorInvalidUserNameAndInvalidPassword() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_INVALID_LOGIN));
         String actError = driver.findElement(ERROR_INVALID_LOGIN).getText();
         return actError;
     }
+
     public String getErrorEmptyLogin() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR_EMPTY_LOGIN));
         String actError = driver.findElement(ERROR_EMPTY_LOGIN).getText();
